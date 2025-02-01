@@ -427,6 +427,28 @@
                 <span class="span"> and </span>
                 <span class="text-wrapper-5">Software Engineer</span>
               </p>
+              <script>
+                  const textElements = document.querySelectorAll(".xdoctor-is-a-web span");
+                  let fullText = "";
+                  textElements.forEach(span => fullText += span.textContent);
+                
+                  const typingElement = document.querySelector(".xdoctor-is-a-web");
+                  typingElement.innerHTML = ""; // Clear initial content
+                
+                  let index = 0;
+                
+                  function typeText() {
+                    if (index < fullText.length) {
+                      typingElement.innerHTML += fullText.charAt(index);
+                      index++;
+                      setTimeout(typeText, 100); // Adjust typing speed (100ms)
+                    } else {
+                      typingElement.style.borderRight = "none"; // Remove cursor after typing
+                    }
+                  }
+                
+                  typeText();
+            </script>
               <p class="text-wrapper-6">He crafts responsive UI's and custom FiveM scripts</p>
               <button class="button"><div class="text-wrapper-7">Contact me!!</div></button>
             </div>

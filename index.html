@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="globals.css" />
     <link rel="stylesheet" href="styleguide.css" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="home">
@@ -428,28 +428,44 @@
                 <span class="text-wrapper-5">Software Engineer</span>
               </p>
               <script>
-                  const textElements = document.querySelectorAll(".xdoctor-is-a-web span");
-                  let fullText = "";
-                  textElements.forEach(span => fullText += span.textContent);
-                
-                  const typingElement = document.querySelector(".xdoctor-is-a-web");
-                  typingElement.innerHTML = ""; // Clear initial content
-                
-                  let index = 0;
-                
-                  function typeText() {
-                    if (index < fullText.length) {
-                      typingElement.innerHTML += fullText.charAt(index);
-                      index++;
-                      setTimeout(typeText, 100); // Adjust typing speed (100ms)
-                    } else {
-                      typingElement.style.borderRight = "none"; // Remove cursor after typing
+                const textSegments = [
+                  { text: "xDoctor is a ", color: "white" },
+                  { text: "Developer", color: "rgba(254, 231, 21, 1)" },
+                  { text: " and ", color: "white" },
+                  { text: "Software Engineer", color: "rgba(254, 231, 21, 1)" }
+                ];
+              
+                const typingElement = document.querySelector(".xdoctor-is-a-web");
+                let fullText = "";
+                textSegments.forEach(segment => fullText += segment.text);
+              
+                typingElement.innerHTML = ""; // Clear initial content
+              
+                let index = 0;
+                let currentSegmentIndex = 0;
+                let currentSegmentText = textSegments[currentSegmentIndex].text;
+                let currentColor = textSegments[currentSegmentIndex].color;
+              
+                function typeText() {
+                  if (index < fullText.length) {
+                    if (index >= currentSegmentText.length) {
+                      currentSegmentIndex++;
+                      currentSegmentText = textSegments[currentSegmentIndex].text;
+                      currentColor = textSegments[currentSegmentIndex].color;
+                      index = 0;
                     }
+              
+                    typingElement.innerHTML += `<span style='color: ${currentColor};'>${currentSegmentText.charAt(index)}</span>`;
+                    index++;
+                    setTimeout(typeText, 100); // Adjust typing speed (100ms)
+                  } else {
+                    typingElement.style.borderRight = "none"; // Remove cursor after typing
                   }
-                
-                  typeText();
-            </script>
-              <p class="text-wrapper-6">He crafts responsive UI's and custom FiveM scripts</p>
+                }
+              
+                typeText();
+              </script>
+                            <p class="text-wrapper-6">He crafts responsive UI's and custom FiveM scripts</p>
               <button class="button"><div class="text-wrapper-7">Contact me!!</div></button>
             </div>
             <div class="overlap-wrapper">
